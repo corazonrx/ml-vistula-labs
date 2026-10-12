@@ -1,0 +1,6 @@
+PASS: exact Python and normalized direct package pins verified by print_versions.py.
+PASS: 5 training and 100 inference timings per model.
+PASS: reported medians match raw samples.
+PASS: recorded model sizes match serialized files.
+PASS: model reload predictions match original predictions (benchmark assertion).
+KNOWN ISSUE: incompatible MLflow/PyArrow pins in supplied manual; see dependency_check.txt.

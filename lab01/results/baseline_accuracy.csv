@@ -1,0 +1,3 @@
+model,accuracy
+logistic_regression,0.9883
+random_forest,0.9357

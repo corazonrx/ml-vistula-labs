@@ -1,0 +1,3 @@
+model,accuracy,training_median_ms,inference_median_ms,model_bytes,model_KB,training_peak_MB,inference_peak_MB
+logistic_regression,0.988304,1.087583,0.034646,2302,2.248047,285.375000,285.875000
+random_forest,0.935673,57.152375,0.827104,290905,284.086914,285.468750,285.578125

@@ -1,0 +1,19 @@
+{
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "processor": "arm",
+  "architecture": "arm64",
+  "logical_cpus": 10,
+  "total_memory_bytes": 17179869184,
+  "train_samples": 398,
+  "test_samples": 171,
+  "train_class_counts": [
+    148,
+    250
+  ],
+  "test_class_counts": [
+    64,
+    107
+  ],
+  "seed": 42,
+  "numerical_threads": 1
+}
