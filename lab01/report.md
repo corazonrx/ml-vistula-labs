@@ -25,8 +25,8 @@ The host is macOS on Apple arm64; further machine details are saved in results/m
 
 | Model | Test accuracy | Train median (ms) | Single-sample median (ms) | Size (bytes) | Size (KB) | Train peak RSS (MB) | Inference peak RSS (MB) |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| logistic_regression | 0.9883 | 1.0876 | 0.0346 | 2302 | 2.248 | 285.375 | 285.875 |
-| random_forest | 0.9357 | 57.1524 | 0.8271 | 290905 | 284.087 | 285.469 | 285.578 |
+| logistic_regression | 0.9883 | 1.0602 | 0.0351 | 2302 | 2.248 | 282.219 | 282.109 |
+| random_forest | 0.9357 | 56.2623 | 0.7966 | 290905 | 284.087 | 282.828 | 282.766 |
 
 Raw individual timings and memory samples' peak summaries are preserved in results/raw_measurements.json. Accuracy to four decimal places is also in results/baseline_accuracy.csv.
 
@@ -46,7 +46,7 @@ Available memory describes the device budget, not a minimum amount a model must 
 | Platform | Logistic regression | Random forest |
 |---|---|---|
 | Cloud | Fits the measured resource limits | Fits the measured resource limits |
-| Edge | Fits devices with sufficient memory above the measured ~286 MB process RSS; does not fit 256 MB | Fits devices with sufficient memory above the measured ~286 MB process RSS; does not fit 256 MB |
+| Edge | Fits devices with sufficient memory above the measured ~283 MB process RSS; does not fit 256 MB | Fits devices with sufficient memory above the measured ~283 MB process RSS; does not fit 256 MB |
 | Mobile | Current Python process exceeds the 256 MB maximum | Current Python process exceeds the 256 MB maximum |
 | TinyML | Current runtime exceeds 256 KB RAM, despite the small serialized model | Exceeds both the 100 KB model-size limit and the 256 KB RAM budget |
 
@@ -58,4 +58,4 @@ These decisions are preliminary resource comparisons, not demonstrations on targ
 
 1. On this fixed split, logistic regression with training-only standardization achieved 0.9883 accuracy, compared with 0.9357 for the 100-tree random forest. This is evidence for this dataset and split, not a universal ranking of the algorithms.
 2. Logistic regression was faster to train and to make a single prediction, and its serialized pipeline was much smaller: about 2.25 KB versus 284.09 KB. It is the stronger baseline among these two measured configurations.
-3. Small model files do not guarantee small runtime memory usage. Both Python processes used roughly 286 MB, making Cloud and sufficiently provisioned Edge devices plausible, while the current implementation exceeded Mobile and TinyML RAM budgets. Target-hardware validation is still necessary.
+3. Small model files do not guarantee small runtime memory usage. Both Python processes used roughly 282–283 MB, making Cloud and sufficiently provisioned Edge devices plausible, while the current implementation exceeded Mobile and TinyML RAM budgets. Target-hardware validation is still necessary.
