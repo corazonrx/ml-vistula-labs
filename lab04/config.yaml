@@ -1,0 +1,30 @@
+dataset:
+  name: adult
+  version: 2
+  expected_rows: 48842
+  expected_columns: 15
+  positive_label: '>50K'
+split:
+  test_size: 0.30
+  random_state: 42
+  strategy: stratified_feature_groups
+cleaning:
+  numeric_imputation: median
+  categorical_imputation: most_frequent
+  missing_marker: '?'
+  clip_lower: 0.01
+  clip_upper: 0.99
+  duplicate_policy: exact_train_rows_only
+model:
+  solver: lbfgs
+  C: 1.0
+  max_iter: 2000
+  tol: 0.0001
+  random_state: 42
+  decision_threshold: 0.5
+label_audit:
+  sample_size: 50
+  random_state: 42
+paths:
+  cache: data/openml
+  results: results

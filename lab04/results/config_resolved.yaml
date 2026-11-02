@@ -1,0 +1,1185 @@
+config:
+  dataset:
+    name: adult
+    version: 2
+    expected_rows: 48842
+    expected_columns: 15
+    positive_label: '>50K'
+  split:
+    test_size: 0.3
+    random_state: 42
+    strategy: stratified_feature_groups
+  cleaning:
+    numeric_imputation: median
+    categorical_imputation: most_frequent
+    missing_marker: '?'
+    clip_lower: 0.01
+    clip_upper: 0.99
+    duplicate_policy: exact_train_rows_only
+  model:
+    solver: lbfgs
+    C: 1.0
+    max_iter: 2000
+    tol: 0.0001
+    random_state: 42
+    decision_threshold: 0.5
+  label_audit:
+    sample_size: 50
+    random_state: 42
+  paths:
+    cache: data/openml
+    results: results
+schema:
+  target: income
+  expected_rows: 48842
+  missing_markers:
+  - '?'
+  allow_predictor_missing: true
+  dictionary_url: https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.names
+  fields:
+    age:
+      type: int
+      min: 17
+      max: 90
+    workclass:
+      type: category
+      allowed: &id001
+      - Private
+      - Self-emp-not-inc
+      - Self-emp-inc
+      - Federal-gov
+      - Local-gov
+      - State-gov
+      - Without-pay
+      - Never-worked
+      - '?'
+    fnlwgt:
+      type: int
+      min: 1
+    education:
+      type: category
+      allowed: &id002
+      - Bachelors
+      - Some-college
+      - 11th
+      - HS-grad
+      - Prof-school
+      - Assoc-acdm
+      - Assoc-voc
+      - 9th
+      - 7th-8th
+      - 12th
+      - Masters
+      - 1st-4th
+      - 10th
+      - Doctorate
+      - 5th-6th
+      - Preschool
+      - '?'
+    education-num:
+      type: int
+      min: 1
+      max: 16
+    marital-status:
+      type: category
+      allowed: &id003
+      - Married-civ-spouse
+      - Divorced
+      - Never-married
+      - Separated
+      - Widowed
+      - Married-spouse-absent
+      - Married-AF-spouse
+      - '?'
+    occupation:
+      type: category
+      allowed: &id004
+      - Tech-support
+      - Craft-repair
+      - Other-service
+      - Sales
+      - Exec-managerial
+      - Prof-specialty
+      - Handlers-cleaners
+      - Machine-op-inspct
+      - Adm-clerical
+      - Farming-fishing
+      - Transport-moving
+      - Priv-house-serv
+      - Protective-serv
+      - Armed-Forces
+      - '?'
+    relationship:
+      type: category
+      allowed: &id005
+      - Wife
+      - Own-child
+      - Husband
+      - Not-in-family
+      - Other-relative
+      - Unmarried
+      - '?'
+    race:
+      type: category
+      allowed: &id006
+      - White
+      - Asian-Pac-Islander
+      - Amer-Indian-Eskimo
+      - Other
+      - Black
+      - '?'
+    sex:
+      type: category
+      allowed: &id007
+      - Female
+      - Male
+      - '?'
+    capital-gain:
+      type: int
+      min: 0
+      max: 99999
+    capital-loss:
+      type: int
+      min: 0
+      max: 4356
+    hours-per-week:
+      type: int
+      min: 1
+      max: 99
+    native-country:
+      type: category
+      allowed: &id008
+      - United-States
+      - Cambodia
+      - England
+      - Puerto-Rico
+      - Canada
+      - Germany
+      - Outlying-US(Guam-USVI-etc)
+      - India
+      - Japan
+      - Greece
+      - South
+      - China
+      - Cuba
+      - Iran
+      - Honduras
+      - Philippines
+      - Italy
+      - Poland
+      - Jamaica
+      - Vietnam
+      - Mexico
+      - Portugal
+      - Ireland
+      - France
+      - Dominican-Republic
+      - Laos
+      - Ecuador
+      - Taiwan
+      - Haiti
+      - Columbia
+      - Hungary
+      - Guatemala
+      - Nicaragua
+      - Scotland
+      - Thailand
+      - Yugoslavia
+      - El-Salvador
+      - Trinadad&Tobago
+      - Peru
+      - Hong
+      - Holand-Netherlands
+      - '?'
+    income:
+      type: category
+      allowed: &id009
+      - <=50K
+      - '>50K'
+      - '?'
+ingestion:
+  name: adult
+  version: 2
+  openml_data_id: '1590'
+  rows: 48842
+  columns: 15
+  predictors: 14
+  source_target_name: class
+  logical_target_name: income
+  storage_dtypes:
+    age: int64
+    workclass: category
+    fnlwgt: int64
+    education: category
+    education-num: int64
+    marital-status: category
+    occupation: category
+    relationship: category
+    race: category
+    sex: category
+    capital-gain: int64
+    capital-loss: int64
+    hours-per-week: int64
+    native-country: category
+    class: category
+  class_counts:
+    <=50K: 37155
+    '>50K': 11687
+  raw_frame_fingerprint: 7f5e92d1c090212a586e30ad01e3b483e6d9640611a9ed3d768130bc814078f3
+  raw_rows_dropped: 0
+environment:
+  python: 3.11.15
+  platform: macOS-27.0.1-arm64-arm-64bit
+  packages:
+    numpy: 1.26.4
+    pandas: 2.2.2
+    scikit-learn: 1.5.0
+    scipy: 1.13.1
+    joblib: 1.4.2
+    PyYAML: 6.0.3
+    threadpoolctl: 3.7.0
+  numerical_threads: 1
+processed_file: processed_dataset.csv
+processed_sha256: 9764686107f87c031ef8514c734c4786c037083625a5a89d24dc36c46633b91d
+processed_rows: 48805
+processed_columns: 19
+processed_bytes: 6561326
+serialization:
+  encoding: UTF-8
+  newline: LF
+  float_format: '%.12g'
+  index: false
+  ordering: train then test; source_row_id ascending within each split
+  stage: imputed/clipped/engineered before scaling and encoding
+feature_formulas:
+  capital_net: capital-gain - capital-loss
+  hours_per_age: hours-per-week / (age - 16)
+validation:
+  shape:
+    rows: 48842
+    columns: 15
+    expected_rows: 48842
+    expected_columns: 15
+    row_count_matches: true
+  schema:
+    missing_columns: []
+    unexpected_columns: []
+    logical_types:
+      age: int
+      workclass: category
+      fnlwgt: int
+      education: category
+      education-num: int
+      marital-status: category
+      occupation: category
+      relationship: category
+      race: category
+      sex: category
+      capital-gain: int
+      capital-loss: int
+      hours-per-week: int
+      native-country: category
+      income: category
+    storage_dtypes:
+      age: int64
+      workclass: category
+      fnlwgt: int64
+      education: category
+      education-num: int64
+      marital-status: category
+      occupation: category
+      relationship: category
+      race: category
+      sex: category
+      capital-gain: int64
+      capital-loss: int64
+      hours-per-week: int64
+      native-country: category
+      income: category
+  missing:
+    age:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    workclass:
+      native_null_count: 2799
+      question_mark_count: 0
+      total_missing: 2799
+      allowed: true
+      examples:
+      - source_row_id: 4
+        value: null
+      - source_row_id: 6
+        value: null
+      - source_row_id: 13
+        value: null
+      - source_row_id: 22
+        value: null
+      - source_row_id: 35
+        value: null
+    fnlwgt:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    education:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    education-num:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    marital-status:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    occupation:
+      native_null_count: 2809
+      question_mark_count: 0
+      total_missing: 2809
+      allowed: true
+      examples:
+      - source_row_id: 4
+        value: null
+      - source_row_id: 6
+        value: null
+      - source_row_id: 13
+        value: null
+      - source_row_id: 22
+        value: null
+      - source_row_id: 35
+        value: null
+    relationship:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    race:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    sex:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    capital-gain:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    capital-loss:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    hours-per-week:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: true
+      examples: []
+    native-country:
+      native_null_count: 857
+      question_mark_count: 0
+      total_missing: 857
+      allowed: true
+      examples:
+      - source_row_id: 19
+        value: null
+      - source_row_id: 65
+        value: null
+      - source_row_id: 83
+        value: null
+      - source_row_id: 188
+        value: null
+      - source_row_id: 253
+        value: null
+    income:
+      native_null_count: 0
+      question_mark_count: 0
+      total_missing: 0
+      allowed: false
+      examples: []
+  types:
+    age:
+      expected: int
+      storage_dtype: int64
+      violations: 0
+      examples: []
+    workclass:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    fnlwgt:
+      expected: int
+      storage_dtype: int64
+      violations: 0
+      examples: []
+    education:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    education-num:
+      expected: int
+      storage_dtype: int64
+      violations: 0
+      examples: []
+    marital-status:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    occupation:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    relationship:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    race:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    sex:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    capital-gain:
+      expected: int
+      storage_dtype: int64
+      violations: 0
+      examples: []
+    capital-loss:
+      expected: int
+      storage_dtype: int64
+      violations: 0
+      examples: []
+    hours-per-week:
+      expected: int
+      storage_dtype: int64
+      violations: 0
+      examples: []
+    native-country:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+    income:
+      expected: category
+      storage_dtype: category
+      violations: 0
+      examples: []
+  ranges:
+    age:
+      min: 17
+      max: 90
+      violations: 0
+      examples: []
+    fnlwgt:
+      min: 1
+      max: null
+      violations: 0
+      examples: []
+    education-num:
+      min: 1
+      max: 16
+      violations: 0
+      examples: []
+    capital-gain:
+      min: 0
+      max: 99999
+      violations: 0
+      examples: []
+    capital-loss:
+      min: 0
+      max: 4356
+      violations: 0
+      examples: []
+    hours-per-week:
+      min: 1
+      max: 99
+      violations: 0
+      examples: []
+  categories:
+    workclass:
+      allowed: *id001
+      violations: 0
+      examples: []
+    education:
+      allowed: *id002
+      violations: 0
+      examples: []
+    marital-status:
+      allowed: *id003
+      violations: 0
+      examples: []
+    occupation:
+      allowed: *id004
+      violations: 0
+      examples: []
+    relationship:
+      allowed: *id005
+      violations: 0
+      examples: []
+    race:
+      allowed: *id006
+      violations: 0
+      examples: []
+    sex:
+      allowed: *id007
+      violations: 0
+      examples: []
+    native-country:
+      allowed: *id008
+      violations: 0
+      examples: []
+    income:
+      allowed: *id009
+      violations: 0
+      examples: []
+  duplicates:
+    exact_duplicate_rows_including_first: 101
+    exact_duplicate_additional_rows: 52
+    exact_duplicate_groups: 49
+    conflicting_feature_groups: 5
+    rows_in_conflicting_feature_groups: 10
+    policy: Report only. Exact duplicate removal is allowed on training rows after
+      splitting; test rows are retained.
+  summary:
+    structural_violations: 0
+    type_violation_cells: 0
+    range_violation_cells: 0
+    category_violation_cells: 0
+    missing_predictor_cells: 6465
+    missing_target_rows: 0
+    disallowed_missing_cells: 0
+    total_violations: 0
+    rows_dropped: 0
+  fatal: false
+split_summary:
+  strategy: seeded_whole_feature_groups_then_exact_stratified_singletons
+  train_rows_before_dedup: 34189
+  test_rows: 14653
+  train_class_counts:
+    <=50K: 26008
+    '>50K': 8181
+  test_class_counts:
+    <=50K: 11147
+    '>50K': 3506
+  duplicate_feature_groups: 54
+  feature_groups_crossing_split: 0
+  removed_training_source_row_ids:
+  - 864
+  - 11189
+  - 13848
+  - 15960
+  - 18476
+  - 19399
+  - 19726
+  - 20606
+  - 21162
+  - 21385
+  - 25189
+  - 25652
+  - 26122
+  - 26375
+  - 29365
+  - 34148
+  - 35848
+  - 36767
+  - 37599
+  - 37771
+  - 38156
+  - 38530
+  - 38581
+  - 38775
+  - 41965
+  - 42153
+  - 42594
+  - 44201
+  - 44511
+  - 44803
+  - 45127
+  - 46626
+  - 46665
+  - 46979
+  - 47126
+  - 48274
+  - 48685
+leakage_checks:
+  raw_frame_unchanged: true
+  raw_test_unchanged: true
+  all_test_rows_retained: true
+  train_test_source_ids_disjoint: true
+  all_raw_rows_assigned: true
+  shared_raw_feature_groups: 0
+  preprocessor_fit_rows: 34152
+  train_rows_after_dedup: 34152
+  train_duplicate_rows_removed: 37
+  train_numeric_medians_match: true
+  train_categorical_modes_match: true
+  preprocessor_reload_matches: true
+  model_reload_predictions_match: true
+  transformed_values_finite: true
+learned_statistics:
+  fitted_on: deduplicated training partition only
+  training_rows: 34152
+  numeric_medians:
+    age: 37.0
+    fnlwgt: 178778.0
+    education-num: 10.0
+    capital-gain: 0.0
+    capital-loss: 0.0
+    hours-per-week: 40.0
+  categorical_modes:
+    workclass: Private
+    education: HS-grad
+    marital-status: Married-civ-spouse
+    occupation: Prof-specialty
+    relationship: Husband
+    race: White
+    sex: Male
+    native-country: United-States
+  clip_lower:
+    age: 17.0
+    fnlwgt: 27164.04
+    education-num: 3.0
+    capital-gain: 0.0
+    capital-loss: 0.0
+    hours-per-week: 8.0
+  clip_upper:
+    age: 74.0
+    fnlwgt: 510072.0
+    education-num: 16.0
+    capital-gain: 15024.0
+    capital-loss: 2001.0
+    hours-per-week: 80.0
+  standard_scaler_means:
+  - 38.59077067228859
+  - 188590.9486319981
+  - 10.09574841883345
+  - 632.7950632466619
+  - 85.54925040993207
+  - 40.36841180604357
+  - 547.2458128367299
+  - 3.108425825944634
+  standard_scaler_samples_seen: 34152
+  encoded_feature_names:
+  - numeric__age
+  - numeric__fnlwgt
+  - numeric__education-num
+  - numeric__capital-gain
+  - numeric__capital-loss
+  - numeric__hours-per-week
+  - numeric__capital_net
+  - numeric__hours_per_age
+  - categorical__workclass_Federal-gov
+  - categorical__workclass_Local-gov
+  - categorical__workclass_Never-worked
+  - categorical__workclass_Private
+  - categorical__workclass_Self-emp-inc
+  - categorical__workclass_Self-emp-not-inc
+  - categorical__workclass_State-gov
+  - categorical__workclass_Without-pay
+  - categorical__education_10th
+  - categorical__education_11th
+  - categorical__education_12th
+  - categorical__education_1st-4th
+  - categorical__education_5th-6th
+  - categorical__education_7th-8th
+  - categorical__education_9th
+  - categorical__education_Assoc-acdm
+  - categorical__education_Assoc-voc
+  - categorical__education_Bachelors
+  - categorical__education_Doctorate
+  - categorical__education_HS-grad
+  - categorical__education_Masters
+  - categorical__education_Preschool
+  - categorical__education_Prof-school
+  - categorical__education_Some-college
+  - categorical__marital-status_Divorced
+  - categorical__marital-status_Married-AF-spouse
+  - categorical__marital-status_Married-civ-spouse
+  - categorical__marital-status_Married-spouse-absent
+  - categorical__marital-status_Never-married
+  - categorical__marital-status_Separated
+  - categorical__marital-status_Widowed
+  - categorical__occupation_Adm-clerical
+  - categorical__occupation_Armed-Forces
+  - categorical__occupation_Craft-repair
+  - categorical__occupation_Exec-managerial
+  - categorical__occupation_Farming-fishing
+  - categorical__occupation_Handlers-cleaners
+  - categorical__occupation_Machine-op-inspct
+  - categorical__occupation_Other-service
+  - categorical__occupation_Priv-house-serv
+  - categorical__occupation_Prof-specialty
+  - categorical__occupation_Protective-serv
+  - categorical__occupation_Sales
+  - categorical__occupation_Tech-support
+  - categorical__occupation_Transport-moving
+  - categorical__relationship_Husband
+  - categorical__relationship_Not-in-family
+  - categorical__relationship_Other-relative
+  - categorical__relationship_Own-child
+  - categorical__relationship_Unmarried
+  - categorical__relationship_Wife
+  - categorical__race_Amer-Indian-Eskimo
+  - categorical__race_Asian-Pac-Islander
+  - categorical__race_Black
+  - categorical__race_Other
+  - categorical__race_White
+  - categorical__sex_Female
+  - categorical__sex_Male
+  - categorical__native-country_Cambodia
+  - categorical__native-country_Canada
+  - categorical__native-country_China
+  - categorical__native-country_Columbia
+  - categorical__native-country_Cuba
+  - categorical__native-country_Dominican-Republic
+  - categorical__native-country_Ecuador
+  - categorical__native-country_El-Salvador
+  - categorical__native-country_England
+  - categorical__native-country_France
+  - categorical__native-country_Germany
+  - categorical__native-country_Greece
+  - categorical__native-country_Guatemala
+  - categorical__native-country_Haiti
+  - categorical__native-country_Holand-Netherlands
+  - categorical__native-country_Honduras
+  - categorical__native-country_Hong
+  - categorical__native-country_Hungary
+  - categorical__native-country_India
+  - categorical__native-country_Iran
+  - categorical__native-country_Ireland
+  - categorical__native-country_Italy
+  - categorical__native-country_Jamaica
+  - categorical__native-country_Japan
+  - categorical__native-country_Laos
+  - categorical__native-country_Mexico
+  - categorical__native-country_Nicaragua
+  - categorical__native-country_Outlying-US(Guam-USVI-etc)
+  - categorical__native-country_Peru
+  - categorical__native-country_Philippines
+  - categorical__native-country_Poland
+  - categorical__native-country_Portugal
+  - categorical__native-country_Puerto-Rico
+  - categorical__native-country_Scotland
+  - categorical__native-country_South
+  - categorical__native-country_Taiwan
+  - categorical__native-country_Thailand
+  - categorical__native-country_Trinadad&Tobago
+  - categorical__native-country_United-States
+  - categorical__native-country_Vietnam
+  - categorical__native-country_Yugoslavia
+  one_hot_categories:
+    workclass:
+    - Federal-gov
+    - Local-gov
+    - Never-worked
+    - Private
+    - Self-emp-inc
+    - Self-emp-not-inc
+    - State-gov
+    - Without-pay
+    education:
+    - 10th
+    - 11th
+    - 12th
+    - 1st-4th
+    - 5th-6th
+    - 7th-8th
+    - 9th
+    - Assoc-acdm
+    - Assoc-voc
+    - Bachelors
+    - Doctorate
+    - HS-grad
+    - Masters
+    - Preschool
+    - Prof-school
+    - Some-college
+    marital-status:
+    - Divorced
+    - Married-AF-spouse
+    - Married-civ-spouse
+    - Married-spouse-absent
+    - Never-married
+    - Separated
+    - Widowed
+    occupation:
+    - Adm-clerical
+    - Armed-Forces
+    - Craft-repair
+    - Exec-managerial
+    - Farming-fishing
+    - Handlers-cleaners
+    - Machine-op-inspct
+    - Other-service
+    - Priv-house-serv
+    - Prof-specialty
+    - Protective-serv
+    - Sales
+    - Tech-support
+    - Transport-moving
+    relationship:
+    - Husband
+    - Not-in-family
+    - Other-relative
+    - Own-child
+    - Unmarried
+    - Wife
+    race:
+    - Amer-Indian-Eskimo
+    - Asian-Pac-Islander
+    - Black
+    - Other
+    - White
+    sex:
+    - Female
+    - Male
+    native-country:
+    - Cambodia
+    - Canada
+    - China
+    - Columbia
+    - Cuba
+    - Dominican-Republic
+    - Ecuador
+    - El-Salvador
+    - England
+    - France
+    - Germany
+    - Greece
+    - Guatemala
+    - Haiti
+    - Holand-Netherlands
+    - Honduras
+    - Hong
+    - Hungary
+    - India
+    - Iran
+    - Ireland
+    - Italy
+    - Jamaica
+    - Japan
+    - Laos
+    - Mexico
+    - Nicaragua
+    - Outlying-US(Guam-USVI-etc)
+    - Peru
+    - Philippines
+    - Poland
+    - Portugal
+    - Puerto-Rico
+    - Scotland
+    - South
+    - Taiwan
+    - Thailand
+    - Trinadad&Tobago
+    - United-States
+    - Vietnam
+    - Yugoslavia
+metrics:
+- variant: baseline
+  accuracy: 0.851361495939398
+  f1: 0.6517428845538855
+  precision: 0.7416302765647744
+  recall: 0.5812892184826013
+  confusion_matrix_labels_0_1:
+  - - 10437
+    - 710
+  - - 1468
+    - 2038
+  train_rows: 34152
+  test_rows: 14653
+  encoded_features: 105
+  n_iter: 75
+- variant: engineered
+  accuracy: 0.85415955776974
+  f1: 0.6609551007456766
+  precision: 0.7447264926707187
+  recall: 0.594124358243012
+  confusion_matrix_labels_0_1:
+  - - 10433
+    - 714
+  - - 1423
+    - 2083
+  train_rows: 34152
+  test_rows: 14653
+  encoded_features: 107
+  n_iter: 71
+label_audit:
+  duplicate_conflicts:
+    groups: 5
+    rows: 10
+    records:
+    - conflict_group_id: 1
+      source_row_id: 1781
+      age: 46
+      workclass: Private
+      fnlwgt: 235646
+      education: HS-grad
+      education-num: 9
+      marital-status: Married-civ-spouse
+      occupation: Craft-repair
+      relationship: Husband
+      race: White
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: <=50K
+    - conflict_group_id: 2
+      source_row_id: 2373
+      age: 34
+      workclass: Private
+      fnlwgt: 169583
+      education: Masters
+      education-num: 14
+      marital-status: Never-married
+      occupation: Exec-managerial
+      relationship: Not-in-family
+      race: White
+      sex: Female
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 50
+      native-country: United-States
+      income: '>50K'
+    - conflict_group_id: 3
+      source_row_id: 11692
+      age: 41
+      workclass: Private
+      fnlwgt: 242804
+      education: HS-grad
+      education-num: 9
+      marital-status: Married-civ-spouse
+      occupation: Transport-moving
+      relationship: Husband
+      race: White
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: <=50K
+    - conflict_group_id: 4
+      source_row_id: 15802
+      age: 46
+      workclass: Private
+      fnlwgt: 224559
+      education: HS-grad
+      education-num: 9
+      marital-status: Married-civ-spouse
+      occupation: Transport-moving
+      relationship: Husband
+      race: Black
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: '>50K'
+    - conflict_group_id: 3
+      source_row_id: 16161
+      age: 41
+      workclass: Private
+      fnlwgt: 242804
+      education: HS-grad
+      education-num: 9
+      marital-status: Married-civ-spouse
+      occupation: Transport-moving
+      relationship: Husband
+      race: White
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: '>50K'
+    - conflict_group_id: 5
+      source_row_id: 17129
+      age: 39
+      workclass: Private
+      fnlwgt: 138192
+      education: Bachelors
+      education-num: 13
+      marital-status: Married-civ-spouse
+      occupation: Craft-repair
+      relationship: Husband
+      race: White
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: <=50K
+    - conflict_group_id: 4
+      source_row_id: 27210
+      age: 46
+      workclass: Private
+      fnlwgt: 224559
+      education: HS-grad
+      education-num: 9
+      marital-status: Married-civ-spouse
+      occupation: Transport-moving
+      relationship: Husband
+      race: Black
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: <=50K
+    - conflict_group_id: 1
+      source_row_id: 32964
+      age: 46
+      workclass: Private
+      fnlwgt: 235646
+      education: HS-grad
+      education-num: 9
+      marital-status: Married-civ-spouse
+      occupation: Craft-repair
+      relationship: Husband
+      race: White
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: '>50K'
+    - conflict_group_id: 5
+      source_row_id: 39042
+      age: 39
+      workclass: Private
+      fnlwgt: 138192
+      education: Bachelors
+      education-num: 13
+      marital-status: Married-civ-spouse
+      occupation: Craft-repair
+      relationship: Husband
+      race: White
+      sex: Male
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 40
+      native-country: United-States
+      income: '>50K'
+    - conflict_group_id: 2
+      source_row_id: 45787
+      age: 34
+      workclass: Private
+      fnlwgt: 169583
+      education: Masters
+      education-num: 14
+      marital-status: Never-married
+      occupation: Exec-managerial
+      relationship: Not-in-family
+      race: White
+      sex: Female
+      capital-gain: 0
+      capital-loss: 0
+      hours-per-week: 50
+      native-country: United-States
+      income: <=50K
+    labels_are_not_reassigned: true
+    definition: Identical raw predictor values, treating '?' and native null as the
+      same missing value, with more than one nonmissing income label.
+  sample:
+    seed: 42
+    requested_rows: 50
+    sampled_rows: 50
+    source_row_ids:
+    - 7762
+    - 23881
+    - 30507
+    - 28911
+    - 19484
+    - 43031
+    - 28188
+    - 12761
+    - 40834
+    - 27875
+    - 1276
+    - 22608
+    - 36230
+    - 13398
+    - 43536
+    - 18627
+    - 38424
+    - 35505
+    - 2372
+    - 3375
+    - 28331
+    - 46820
+    - 147
+    - 21063
+    - 20139
+    - 23288
+    - 18957
+    - 31256
+    - 29642
+    - 23638
+    - 18067
+    - 879
+    - 7155
+    - 43769
+    - 17697
+    - 21167
+    - 3136
+    - 34254
+    - 17657
+    - 37254
+    - 1422
+    - 32507
+    - 30150
+    - 14172
+    - 32273
+    - 48262
+    - 10007
+    - 47649
+    - 43058
+    - 708
+    automated_dictionary_passed_rows: 50
+    automated_dictionary_failed_rows: 0
+    impossible_value_count: 0
+    dictionary_url: https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.names
+    automated_checks: Logical integer types, fixed category vocabulary, lab ranges,
+      missing target, and education/education-num consistency. Missing predictors
+      are reported and allowed.
+  manual_review:
+    status: pending_user_review
+    completed_rows: 0
+    previous_reviewer_fields_preserved: true
+    displaced_review_archive: null
+    instructions: Inspect each sampled row against the UCI data dictionary. Fill reviewer,
+      verdict (valid/impossible/uncertain), and notes in manual_review.csv. Automated
+      checks do not constitute a human review or verification of the income label.
+  artifacts:
+    manual_review: manual_review.csv
