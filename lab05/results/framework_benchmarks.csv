@@ -1,0 +1,8 @@
+experiment,variant,median_ms,shape,dtype,contiguous
+execution,eager,0.0063023749999999998,1x2,torch.float64,True
+execution,torchscript_trace_frozen,0.003499542,1x2,torch.float64,True
+execution,eager,0.0085080840000000008,64x2,torch.float64,True
+execution,torchscript_trace_frozen,0.0052362910000000006,64x2,torch.float64,True
+tensor_layout,noncontiguous_sum,0.040738959999999998,512x512,torch.float64,False
+tensor_layout,contiguous_sum,0.026329999999999999,512x512,torch.float64,True
+tensor_layout,copy_then_sum,0.095530624999999994,512x512,torch.float64,False

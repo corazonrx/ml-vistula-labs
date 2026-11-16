@@ -1,0 +1,86 @@
+SCALAR VALUE GRAPH
+Expression: sum(relu((a[i] * b[i] + c[i]) ** 2))
+Topological order: parents before their outputs. Backward traverses this in reverse.
+Each backward() resets reachable gradients and seeds the output gradient with 1.
+
+n0: op=leaf label=- data=0 grad=1 parents=[]
+n1: op=leaf label=a[0] data=0.493120887401 grad=0.324653142057 parents=[]
+n2: op=leaf label=b[0] data=0.856120232946 grad=0.18699855388 parents=[]
+n3: op=* label=- data=0.422170768992 grad=0.379214425222 parents=[n1, n2]
+n4: op=leaf label=c[0] data=-0.232563556381 grad=0.379214425222 parents=[]
+n5: op=+ label=- data=0.189607212611 grad=0.379214425222 parents=[n3, n4]
+n6: op=**2 label=- data=0.035950895074 grad=1 parents=[n5]
+n7: op=ReLU label=- data=0.035950895074 grad=1 parents=[n6]
+n8: op=+ label=- data=0.035950895074 grad=1 parents=[n0, n7]
+n9: op=leaf label=a[1] data=-0.110018808446 grad=0.673548472768 parents=[]
+n10: op=leaf label=b[1] data=0.470051463583 grad=-0.157648696251 parents=[]
+n11: op=* label=- data=-0.0517145019318 grad=1.43292495599 parents=[n9, n10]
+n12: op=leaf label=c[1] data=0.768176979927 grad=1.43292495599 parents=[]
+n13: op=+ label=- data=0.716462477996 grad=1.43292495599 parents=[n11, n12]
+n14: op=**2 label=- data=0.513318482376 grad=1 parents=[n13]
+n15: op=ReLU label=- data=0.513318482376 grad=1 parents=[n14]
+n16: op=+ label=- data=0.54926937745 grad=1 parents=[n8, n15]
+n17: op=leaf label=a[2] data=0.64547625584 grad=0.608963160854 parents=[]
+n18: op=leaf label=b[2] data=0.514915749499 grad=0.76337004917 parents=[]
+n19: op=* label=- data=0.33236589006 grad=1.18264621241 parents=[n17, n18]
+n20: op=leaf label=c[2] data=0.258957216145 grad=1.18264621241 parents=[]
+n21: op=+ label=- data=0.591323106205 grad=1.18264621241 parents=[n19, n20]
+n22: op=**2 label=- data=0.349663015932 grad=1 parents=[n21]
+n23: op=ReLU label=- data=0.349663015932 grad=1 parents=[n22]
+n24: op=+ label=- data=0.898932393381 grad=1 parents=[n16, n23]
+n25: op=leaf label=a[3] data=0.355262452307 grad=-0.459419266375 parents=[]
+n26: op=leaf label=b[3] data=-0.669395461184 grad=0.243823606035 parents=[]
+n27: op=* label=- data=-0.237811073103 grad=0.686319661568 parents=[n25, n26]
+n28: op=leaf label=c[3] data=0.580970903887 grad=0.686319661568 parents=[]
+n29: op=+ label=- data=0.343159830784 grad=0.686319661568 parents=[n27, n28]
+n30: op=**2 label=- data=0.117758669464 grad=1 parents=[n29]
+n31: op=ReLU label=- data=0.117758669464 grad=1 parents=[n30]
+n32: op=+ label=- data=1.01669106285 grad=1 parents=[n24, n31]
+n33: op=leaf label=a[4] data=-0.730480773802 grad=0.00654047613362 parents=[]
+n34: op=leaf label=b[4] data=-0.089305311788 grad=0.0534984086777 parents=[]
+n35: op=* label=- data=0.0652358132595 grad=-0.0732372577025 parents=[n33, n34]
+n36: op=leaf label=c[4] data=-0.101854442111 grad=-0.0732372577025 parents=[]
+n37: op=+ label=- data=-0.0366186288513 grad=-0.0732372577025 parents=[n35, n36]
+n38: op=**2 label=- data=0.00134092397895 grad=1 parents=[n37]
+n39: op=ReLU label=- data=0.00134092397895 grad=1 parents=[n38]
+n40: op=+ label=- data=1.01803198682 grad=1 parents=[n32, n39]
+
+EAGER AUTOGRAD GRAPH
+Differentiable forward; next_functions edges point toward inputs/leaves.
+No backward call is made during this inspection.
+
+Nodes:
+n0: SigmoidBackward0
+n1: AddmmBackward0
+n2: AccumulateGrad parameter=2.bias
+n3: ReluBackward0
+n4: TBackward0
+n5: AddmmBackward0
+n6: AccumulateGrad parameter=2.weight
+n7: AccumulateGrad parameter=0.bias
+n8: TBackward0
+n9: AccumulateGrad parameter=0.weight
+
+Edges:
+n0 -> n1 (input_nr=0)
+n1 -> n2 (input_nr=0)
+n1 -> n3 (input_nr=0)
+n1 -> n4 (input_nr=0)
+n3 -> n5 (input_nr=0)
+n4 -> n6 (input_nr=0)
+n5 -> n7 (input_nr=0)
+n5 -> n8 (input_nr=0)
+n8 -> n9 (input_nr=0)
+
+FROZEN TRACED INLINED GRAPH
+graph(%self.1 : __torch__.torch.nn.modules.container.___torch_mangle_6.Sequential,
+      %input.1 : Tensor):
+  %self.2.weight : Double(1, 8, strides=[8, 1], requires_grad=0, device=cpu) = prim::Constant[value= 0.3922 -0.9231 -0.3162  0.2530  0.2470 -1.1696  0.9916  1.2348 [ CPUDoubleType{1,8} ]]()
+  %self.2.bias : Double(1, strides=[1], requires_grad=0, device=cpu) = prim::Constant[value={-0.122282}]()
+  %self.0.weight : Double(8, 2, strides=[2, 1], requires_grad=0, device=cpu) = prim::Constant[value=<Tensor>]()
+  %self.0.bias : Double(8, strides=[1], requires_grad=0, device=cpu) = prim::Constant[value=-0.1466  0.1916 -0.1747 -0.2001  0.1423  0.0561 -0.4447  0.7185 [ CPUDoubleType{8} ]]()
+  %input.3 : Tensor = aten::linear(%input.1, %self.0.weight, %self.0.bias), scope: __module.0 # /Users/denys/Documents/ml-systems-labs/lab05/.venv/lib/python3.11/site-packages/torch/nn/modules/linear.py:116:0
+  %input.5 : Tensor = aten::relu(%input.3), scope: __module.1 # /Users/denys/Documents/ml-systems-labs/lab05/.venv/lib/python3.11/site-packages/torch/nn/functional.py:1500:0
+  %input : Tensor = aten::linear(%input.5, %self.2.weight, %self.2.bias), scope: __module.2 # /Users/denys/Documents/ml-systems-labs/lab05/.venv/lib/python3.11/site-packages/torch/nn/modules/linear.py:116:0
+  %9 : Tensor = aten::sigmoid(%input), scope: __module.3 # /Users/denys/Documents/ml-systems-labs/lab05/.venv/lib/python3.11/site-packages/torch/nn/modules/activation.py:292:0
+  return (%9)

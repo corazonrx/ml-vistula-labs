@@ -1,0 +1,40 @@
+seed: 42
+data:
+  samples: 200
+  noise: 0.20
+  test_size: 0.30
+  random_state: 42
+model:
+  inputs: 2
+  hidden: 8
+  outputs: 1
+  hidden_activation: relu
+  output_activation: sigmoid
+  loss: binary_cross_entropy
+  dtype: float64
+training:
+  epochs: 200
+  learning_rate: 0.15
+  repeats: 5
+  warmup_epochs: 20
+  initialization_seed: 42
+gradient_check:
+  seed: 42
+  elements: 5
+  epsilon: 0.000001
+  tolerance: 0.000001
+execution:
+  seed: 42
+  batches: [1, 64]
+  warmup: 100
+  iterations: 1000
+  repeats: 5
+tensors:
+  seed: 43
+  rows: 512
+  columns: 512
+  warmup: 30
+  iterations: 200
+  repeats: 5
+paths:
+  results: results
