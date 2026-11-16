@@ -1,0 +1,37 @@
+seed: 42
+data:
+  name: load_digits
+  scale_divisor: 16.0
+  test_size: 0.30
+  random_state: 42
+model:
+  inputs: 64
+  hidden_widths: [16, 64]
+  outputs: 10
+  weight_mean: 0.0
+  weight_std: 0.01
+  bias_initialization: zero
+  dtype: float64
+  initialization_seed: 42
+training:
+  learning_rates: [0.001, 0.01, 0.1]
+  batch_size: 32
+  epochs: 50
+  shuffle_seed: 42
+gradient_check:
+  batch_size: 16
+  samples: 10
+  random_state: 42
+  epsilon: 0.00001
+  tolerance: 0.000001
+  denominator_floor: 0.000000000001
+  minimum_passes: 9
+checks:
+  probability_sum_tolerance: 0.000001
+  initial_loss_absolute_tolerance: 0.05
+timing:
+  batch_size: 32
+  warmup: 20
+  repeats: 100
+paths:
+  results: results
